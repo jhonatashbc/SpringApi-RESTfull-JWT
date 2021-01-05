@@ -1,5 +1,6 @@
 package com.springcourse.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -26,8 +27,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "request_stage")
-public class RequestStage {
+public class RequestStage implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -48,7 +51,7 @@ public class RequestStage {
 	private Request request;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
+	@JoinColumn(name = "owner_id", nullable = false)
+	private User owner;
 
 }
