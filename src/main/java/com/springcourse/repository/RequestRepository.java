@@ -12,8 +12,8 @@ import com.springcourse.domain.enums.RequestState;
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long>{
 
-	public List<Request> findAllByOwnerid(Long ownerId);
+	public List<Request> findAllByOwnerId(Long ownerId);
 	
-	@Query("UPDATE Request SET state = ?2 WHERE id = ?1")
+	@Query("UPDATE request SET state = ?2 WHERE id = ?1")
 	public Request updateStatus(Long requestId, RequestState state);
 }
