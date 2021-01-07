@@ -19,7 +19,7 @@ import com.springcourse.service.RequestService;
 import com.springcourse.service.RequestStageService;
 
 @RestController
-@RequestMapping(value = "request")
+@RequestMapping(value = "requests")
 public class RequestResource {
 
 	@Autowired
