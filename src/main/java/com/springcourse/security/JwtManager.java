@@ -20,7 +20,7 @@ public class JwtManager {
 
 	public UserLoginResponsedto createToken(String email, List<String> roles) {
 		LocalDate date = LocalDate.now();
-		date.plusDays(SecurityConstants.JTW_EX_DAYS);
+		date = date.plusDays(SecurityConstants.JTW_EX_DAYS);
 		
 		String jwt = Jwts.builder()
 				.setSubject(email)
@@ -36,7 +36,7 @@ public class JwtManager {
 	
 	public Claims parseToken(String jwt) throws JwtException{
 		Claims claims = Jwts.parser()
-				.setSigningKey(SecurityConstants.JWT_ROLE_KEY.getBytes())
+				.setSigningKey(SecurityConstants.API_KEY.getBytes())
 				.parseClaimsJws(jwt)
 				.getBody();
 		
