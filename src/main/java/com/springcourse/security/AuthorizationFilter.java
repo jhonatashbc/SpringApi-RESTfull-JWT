@@ -34,7 +34,7 @@ public class AuthorizationFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
-		if(jwt == null || jwt.startsWith(SecurityConstants.JWT_PROVIDER)) {
+		if(jwt == null || !jwt.startsWith(SecurityConstants.JWT_PROVIDER)) {
 			ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED.value(), SecurityConstants.JWT_INVALID_MSG, new Date());
 			PrintWriter writer =  response.getWriter();
 			
@@ -49,7 +49,7 @@ public class AuthorizationFilter extends OncePerRequestFilter{
 			return;
 		}
 		
-		jwt = jwt.replace(SecurityConstants.JWT_PROVIDER, "");
+		jwt = jwt.replace(SecurityConstants.JWT_PROVIDER, "").trim();
 		try {
 			Claims claims = new JwtManager().parseToken(jwt);
 			String email = claims.getSubject();
