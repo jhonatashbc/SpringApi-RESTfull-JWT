@@ -41,7 +41,7 @@ public class Request implements Serializable{
 	private Long id;
 	
 	@Column(length = 75, nullable = false)
-	private String suject;
+	private String subject;
 	
 	@Column(columnDefinition = "text")
 	private String description;
