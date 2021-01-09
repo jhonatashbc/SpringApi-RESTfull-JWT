@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import com.springcourse.constant.SecurityConstants;
 import com.springcourse.dto.UserLoginResponsedto;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -30,5 +32,14 @@ public class JwtManager {
 		UserLoginResponsedto response = new UserLoginResponsedto(jwt, Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()), SecurityConstants.JWT_PROVIDER);
 		
 		return response;
+	}
+	
+	public Claims parseToken(String jwt) throws JwtException{
+		Claims claims = Jwts.parser()
+				.setSigningKey(SecurityConstants.JWT_ROLE_KEY.getBytes())
+				.parseClaimsJws(jwt)
+				.getBody();
+		
+		return claims;
 	}
 }
