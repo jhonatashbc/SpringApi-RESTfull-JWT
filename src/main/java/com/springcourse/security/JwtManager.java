@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.springcourse.constant.SecurityConstants;
+import com.springcourse.dto.UserLoginResponsedto;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -15,7 +16,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtManager {
 
-	public String createToken(String email, List<String> roles) {
+	public UserLoginResponsedto createToken(String email, List<String> roles) {
 		LocalDate date = LocalDate.now();
 		date.plusDays(SecurityConstants.JTW_EX_DAYS);
 		
@@ -26,6 +27,8 @@ public class JwtManager {
 				.signWith(SignatureAlgorithm.HS512, SecurityConstants.API_KEY.getBytes())
 				.compact();
 		
-		return jwt;
+		UserLoginResponsedto response = new UserLoginResponsedto(jwt, Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()), SecurityConstants.JWT_PROVIDER);
+		
+		return response;
 	}
 }

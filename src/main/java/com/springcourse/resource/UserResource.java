@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springcourse.domain.Request;
 import com.springcourse.domain.User;
+import com.springcourse.dto.UserLoginResponsedto;
 import com.springcourse.dto.UserLogindto;
 import com.springcourse.dto.UserSavedto;
 import com.springcourse.dto.UserUpdateRoledto;
@@ -40,13 +41,13 @@ public class UserResource {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private RequestService requestService;
-	
+
 	@Autowired
 	private AuthenticationManager authManager;
-	
+
 	@Autowired
 	private JwtManager jwtManager;
 
@@ -69,51 +70,52 @@ public class UserResource {
 		User user = userService.getById(id);
 		return ResponseEntity.ok(user);
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<PageModel<User>> listAll(@RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "size", defaultValue = "5") int size){
+	public ResponseEntity<PageModel<User>> listAll(@RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "size", defaultValue = "5") int size) {
 		PageRequestModel pr = new PageRequestModel(page, size);
 		PageModel<User> pm = userService.listAllOnLazyModel(pr);
 		return ResponseEntity.ok(pm);
 	}
-	
+
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody @Valid UserLogindto user){
-		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
-		Authentication auth =  authManager.authenticate(token);
-		
+	public ResponseEntity<UserLoginResponsedto> login(@RequestBody @Valid UserLogindto user) {
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getEmail(),
+				user.getPassword());
+		Authentication auth = authManager.authenticate(token);
+
 		SecurityContextHolder.getContext().setAuthentication(auth);
-		
-		org.springframework.security.core.userdetails.User userSpring = 
-				(org.springframework.security.core.userdetails.User) auth.getPrincipal();
-		
+
+		org.springframework.security.core.userdetails.User userSpring = (org.springframework.security.core.userdetails.User) auth
+				.getPrincipal();
+
 		String email = userSpring.getUsername();
-		List<String> roles = userSpring.getAuthorities().stream()
-				.map((a) -> a.getAuthority())
+		List<String> roles = userSpring.getAuthorities().stream().map((a) -> a.getAuthority())
 				.collect(Collectors.toList());
-		
-		String jwt = jwtManager.createToken(email, roles);
-		
-		
-		return ResponseEntity.ok(jwt);
+
+		return ResponseEntity.ok(jwtManager.createToken(email, roles));
 	}
-	
+
 	@GetMapping("/{id}/requests")
-	public ResponseEntity<PageModel<Request>> listAllRequestsById(@PathVariable(name = "id") Long id, @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "5") int size){
+	public ResponseEntity<PageModel<Request>> listAllRequestsById(@PathVariable(name = "id") Long id,
+			@RequestParam(name = "page", defaultValue = "0") int page,
+			@RequestParam(name = "size", defaultValue = "5") int size) {
 		PageRequestModel pr = new PageRequestModel(page, size);
-		
+
 		PageModel<Request> pm = requestService.listAllByOwnerIdOnLazyModel(id, pr);
 		return ResponseEntity.ok(pm);
 	}
-	
+
 	@PatchMapping("role/{id}")
-	public ResponseEntity<?> updateRole(@RequestBody @Valid UserUpdateRoledto userRole, @PathVariable(name = "id") Long id){
+	public ResponseEntity<?> updateRole(@RequestBody @Valid UserUpdateRoledto userRole,
+			@PathVariable(name = "id") Long id) {
 		User user = new User();
 		user.setId(id);
 		user.setRole(userRole.getRole());
-		
+
 		userService.updateRole(user);
-		
+
 		return ResponseEntity.ok().build();
 	}
 }
