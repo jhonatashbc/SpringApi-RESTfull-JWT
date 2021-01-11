@@ -49,7 +49,7 @@ public class AuthorizationFilter extends OncePerRequestFilter{
 			return;
 		}
 		
-		jwt = jwt.replace(SecurityConstants.JWT_PROVIDER, "").trim();
+		jwt = jwt.replace(SecurityConstants.JWT_PROVIDER, "");
 		try {
 			Claims claims = new JwtManager().parseToken(jwt);
 			String email = claims.getSubject();
