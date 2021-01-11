@@ -22,6 +22,7 @@ public class PageRequestModel {
 	private int page = 0;
 	private int size = 5;
 	private String sort = "";
+	private String search = "";
 	
 	public PageRequestModel(Map<String, String> params) {
 		if(params.containsKey("page")) {
@@ -32,6 +33,9 @@ public class PageRequestModel {
 		}
 		if (params.containsKey("sort")) {
 			sort = params.get("sort");
+		}
+		if (params.containsKey("search")) {
+			search = params.get("search");
 		}
 	}
 	

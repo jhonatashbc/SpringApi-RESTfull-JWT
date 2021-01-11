@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,7 @@ import com.springcourse.domain.User;
 import com.springcourse.domain.enums.Role;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
 	public List<User> findByName(String name);
 	
@@ -28,4 +29,5 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	@Modifying
 	@Query("UPDATE user SET role = ?2 WHERE id = ?1")
 	public int updateRole(Long id, Role role);
+	
 }
