@@ -1,5 +1,7 @@
 package com.springcourse.resource;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,17 +59,16 @@ public class RequestResource {
 	}
 
 	@GetMapping
-	public ResponseEntity<PageModel<Request>> listAll(@RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "size", defaultValue = "5") int size) {
-		PageRequestModel pr = new PageRequestModel(page, size);
+	public ResponseEntity<PageModel<Request>> listAll(@RequestParam Map<String, String> params) {
+		PageRequestModel pr = new PageRequestModel(params);
 		PageModel<Request> pm = requestService.listAllOnLazyModel(pr);
 		return ResponseEntity.ok(pm);
 	}
 
 	@GetMapping("/{id}/stages")
 	public ResponseEntity<PageModel<RequestStage>> listAllStagesByRequestId(@PathVariable(name = "id") Long id,
-			@RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "size", defaultValue = "5") int size) {
-		PageRequestModel pr = new PageRequestModel(page, size);
+			@RequestParam Map<String, String> params) {
+		PageRequestModel pr = new PageRequestModel(params);
 		PageModel<RequestStage> pm = requestStageService.listAllByRequestIdOnLazyModel(id, pr);
 
 		return ResponseEntity.ok(pm);
