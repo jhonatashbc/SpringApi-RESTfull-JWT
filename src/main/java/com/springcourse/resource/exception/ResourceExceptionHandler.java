@@ -37,7 +37,7 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(AccessDeniedException.class)
 	public ResponseEntity<ApiError> handlerAccessDeniedException(AccessDeniedException ex) {
 		ApiError error = new ApiError(HttpStatus.FORBIDDEN.value(), ex.getMessage(), new Date());
-
+		
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
 	}
 
