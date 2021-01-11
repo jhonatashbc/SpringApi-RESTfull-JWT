@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -23,37 +22,37 @@ public class RequestStageService {
 
 	@Autowired
 	private RequestStageRepository stageRepository;
-	
+
 	@Autowired
 	private RequestRepository requestRepository;
 
 	public RequestStage save(RequestStage stage) {
 		stage.setRealizationDate(new Date());
 		RequestStage createdStage = stageRepository.save(stage);
-		
+
 		Long requestId = stage.getRequest().getId();
 		RequestState state = stage.getState();
 		requestRepository.updateStatus(requestId, state);
-		
+
 		return createdStage;
 	}
 
 	public RequestStage getById(Long id) {
 		Optional<RequestStage> result = stageRepository.findById(id);
-		return result.orElseThrow(() -> new NotFoundException("There are no request stage with the id = "+ id));
+		return result.orElseThrow(() -> new NotFoundException("There are no request stage with the id = " + id));
 	}
 
 	public List<RequestStage> listAllByRequestId(Long requestId) {
 		List<RequestStage> stages = stageRepository.findAllByRequestId(requestId);
 		return stages;
 	}
-	
+
 	public PageModel<RequestStage> listAllByRequestIdOnLazyModel(Long ownerId, PageRequestModel pr) {
-		Pageable pageable = PageRequest.of(pr.getPage(), pr.getSize());
+		Pageable pageable = pr.toSpringPageRequest();
 		Page<RequestStage> page = stageRepository.findAllByRequestId(ownerId, pageable);
 
-		PageModel<RequestStage> pm = new PageModel<>((int) page.getTotalElements(), page.getSize(), page.getTotalPages(),
-				page.getContent());
+		PageModel<RequestStage> pm = new PageModel<>((int) page.getTotalElements(), page.getSize(),
+				page.getTotalPages(), page.getContent());
 		return pm;
 	}
 }
