@@ -33,14 +33,12 @@ import com.springcourse.dto.UserUpdateRoledto;
 import com.springcourse.dto.UserUpdatedto;
 import com.springcourse.model.PageModel;
 import com.springcourse.model.PageRequestModel;
-import com.springcourse.security.AccessManager;
 import com.springcourse.security.JwtManager;
 import com.springcourse.service.RequestService;
 import com.springcourse.service.UserService;
 
 @RestController
 @RequestMapping(value = "users")
-@SuppressWarnings("unused")
 public class UserResource {
 
 	@Autowired
@@ -54,11 +52,8 @@ public class UserResource {
 
 	@Autowired
 	private JwtManager jwtManager;
-	
-	@Autowired
-	private AccessManager accessManager;
 
-	@Secured( {"ROLE_ADMIN"} )
+	@Secured({ "ROLE_ADMIN" })
 	@PostMapping
 	public ResponseEntity<User> save(@RequestBody @Valid UserSavedto userdto) {
 		User createdUser = userService.save(userdto.transformToUser());
@@ -116,7 +111,7 @@ public class UserResource {
 		return ResponseEntity.ok(pm);
 	}
 
-	@Secured( {"ROLE_ADMIN"} )
+	@Secured({ "ROLE_ADMIN" })
 	@PatchMapping("role/{id}")
 	public ResponseEntity<?> updateRole(@RequestBody @Valid UserUpdateRoledto userRole,
 			@PathVariable(name = "id") Long id) {

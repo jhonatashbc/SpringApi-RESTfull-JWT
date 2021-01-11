@@ -21,13 +21,11 @@ import com.springcourse.dto.RequestSavedto;
 import com.springcourse.dto.RequestUpdatedto;
 import com.springcourse.model.PageModel;
 import com.springcourse.model.PageRequestModel;
-import com.springcourse.security.AccessManager;
 import com.springcourse.service.RequestService;
 import com.springcourse.service.RequestStageService;
 
 @RestController
 @RequestMapping(value = "requests")
-@SuppressWarnings("unused")
 public class RequestResource {
 
 	@Autowired
@@ -36,9 +34,6 @@ public class RequestResource {
 	@Autowired
 	private RequestStageService requestStageService;
 	
-	@Autowired
-	private AccessManager accessManager;
-
 	@PostMapping
 	public ResponseEntity<Request> save(@RequestBody @Valid RequestSavedto requestdto) {
 		Request createdRequest = requestService.save(requestdto.transformToRequest());
