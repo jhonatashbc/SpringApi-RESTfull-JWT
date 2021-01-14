@@ -16,12 +16,16 @@ import com.springcourse.domain.enums.RequestState;
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long>{
 
-	public List<Request> findAllByOwnerId(Long ownerId);
+	List<Request> findAllByOwnerId(Long ownerId);
 	
 	@Transactional(readOnly = false)
 	@Modifying
 	@Query("UPDATE request SET state = ?2 WHERE id = ?1")
-	public int updateStatus(Long requestId, RequestState state);
+	int updateStatus(Long requestId, RequestState state);
 	
-	public Page<Request> findAllByOwnerId(Long id, Pageable pageable);
+	Page<Request> findAllByOwnerId(Long id, Pageable pageable);
+
+	Page<Request> findAllByClientIdentificationNumber(String identificationNumber, Pageable pageable );
+
+	Page<Request> findAllByClientId(Long id, Pageable pageable );
 }

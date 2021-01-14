@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.springcourse.domain.Client;
 import com.springcourse.domain.Request;
 import com.springcourse.domain.RequestStage;
 import com.springcourse.domain.User;
@@ -29,10 +30,13 @@ public class RequestSavedto {
 	@NotNull(message = "Owner required")
 	private User owner;
 
+	@NotNull(message = "Client required")
+	private Client client;
+
 	private List<RequestStage> stages = new ArrayList<>();
 
 	public Request transformToRequest() {
-		Request request = new Request(null, this.subject, this.description, null, null, this.owner, this.stages);
+		Request request = new Request(null, this.subject, this.description, null, null, this.owner, this.stages, this.client);
 		return request;
 	}
 }

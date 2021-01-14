@@ -16,18 +16,18 @@ import com.springcourse.domain.enums.Role;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
-	public List<User> findByName(String name);
+	List<User> findByName(String name);
 	
-	public Optional<User> findByEmail(String email);
+	Optional<User> findByEmail(String email);
 	
-	public Optional<User> findByEmailAndPassword(String email, String password);
+	Optional<User> findByEmailAndPassword(String email, String password);
 	
 	@Query("SELECT u FROM user u WHERE email = ?1 AND password = ?2")
-	public Optional<User> login(String email, String password);
+	Optional<User> login(String email, String password);
 	
 	@Transactional(readOnly = false)
 	@Modifying
 	@Query("UPDATE user SET role = ?2 WHERE id = ?1")
-	public int updateRole(Long id, Role role);
+	int updateRole(Long id, Role role);
 	
 }

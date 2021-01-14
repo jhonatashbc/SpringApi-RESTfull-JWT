@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.springcourse.domain.Client;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -29,7 +30,9 @@ public class RequestRepositoryTests {
 	public void saveTest() {
 		User owner = new User();
 		owner.setId(1L);
-		Request request = new Request(null, "Novo Laptop HP", "Pretendo obter um laptop HP", new Date(), RequestState.OPEN, owner, null);
+		Client client = new Client();
+		client.setId(1L);
+		Request request = new Request(null, "Novo Laptop HP", "Pretendo obter um laptop HP", new Date(), RequestState.OPEN, owner, null, client);
 		
 		Request createdRequest = requestRepository.save(request);
 		
@@ -40,7 +43,8 @@ public class RequestRepositoryTests {
 	public void updateTest() {
 		User owner = new User();
 		owner.setId(1L);
-		Request request = new Request(1L, "Novo Laptop HP", "Pretendo obter um laptop HP, de RAM 16 GB", null, RequestState.OPEN, owner, null);
+
+		Request request = new Request(1L, "Novo Laptop HP", "Pretendo obter um laptop HP, de RAM 16 GB", null, RequestState.OPEN, owner, null, null);
 		
 		Request updateRequest = requestRepository.save(request);
 		

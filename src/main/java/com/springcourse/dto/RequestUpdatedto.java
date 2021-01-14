@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.springcourse.domain.Client;
 import com.springcourse.domain.Request;
 import com.springcourse.domain.RequestStage;
 import com.springcourse.domain.User;
@@ -36,7 +37,7 @@ public class RequestUpdatedto {
 	private List<RequestStage> stages = new ArrayList<>();
 
 	public Request transformToRequest() {
-		Request request = new Request(null, this.subject, this.description, null, this.state, this.owner, this.stages);
+		Request request = new Request(null, this.subject, this.description, null, this.state, this.owner, this.stages, null);
 		return request;
 	}
 }

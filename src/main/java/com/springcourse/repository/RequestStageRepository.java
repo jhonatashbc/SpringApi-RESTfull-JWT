@@ -12,7 +12,7 @@ import com.springcourse.domain.RequestStage;
 @Repository
 public interface RequestStageRepository extends JpaRepository<RequestStage, Long>{
 
-	public List<RequestStage> findAllByRequestId(Long requestId);
+	List<RequestStage> findAllByRequestId(Long requestId);
 	
-	public Page<RequestStage> findAllByRequestId(Long requestId, Pageable pageable);
+	Page<RequestStage> findAllByRequestId(Long requestId, Pageable pageable);
 }
