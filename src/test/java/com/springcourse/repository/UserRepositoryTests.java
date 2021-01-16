@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.springcourse.domain.User;
 import com.springcourse.domain.enums.Role;
+import com.springcourse.service.util.HashUtil;
 
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)
@@ -25,7 +26,9 @@ public class UserRepositoryTests {
 	@Test
 	@Order(1)
 	public void savetest() {
-		User user = new  User(null, "Jhonatas", "jhonatashbc@hotmail.com", "senha123", Role.ADMIN, null, null);
+		String hash = HashUtil.getSecureHash("senha123");
+		
+		User user = new  User(null, "Jhonatas", "jhonatashbc@hotmail.com", hash, Role.ADMIN, null, null);
 		User createdUser = userRepository.save(user);
 		
 		assertThat(createdUser.getId()).isEqualTo(1L);
@@ -33,7 +36,8 @@ public class UserRepositoryTests {
 	
 	@Test
 	public void updateTest() {
-		User user = new  User(1L, "Jhonatas henrique", "jhonatashbc@hotmail.com", "senha123", Role.ADMIN, null, null);
+		String hash = HashUtil.getSecureHash("senha123");
+		User user = new  User(1L, "Jhonatas henrique", "jhonatashbc@hotmail.com", hash, Role.ADMIN, null, null);
 		User updatedUser = userRepository.save(user);
 		
 		assertThat(updatedUser.getName()).isEqualTo("Jhonatas henrique");
