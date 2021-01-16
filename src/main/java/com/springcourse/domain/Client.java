@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -46,6 +47,6 @@ public class Client implements Serializable {
 
     @Getter(onMethod = @__({@JsonIgnore}))
     @OneToMany(mappedBy = "client")
-    private List<Request> request;
+    private List<Request> requests = new ArrayList<Request>();
 
 }
