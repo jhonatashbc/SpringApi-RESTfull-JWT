@@ -66,4 +66,22 @@ public class RequestService {
 				page.getContent());
 		return pm;
 	}
+	
+	public PageModel<Request> listAllByClientIdOnLazyModel(Long clientId, PageRequestModel pr) {
+		Pageable pageable = pr.toSpringPageRequest();
+		Page<Request> page = requestRepository.findAllByClientId(clientId, pageable);
+
+		PageModel<Request> pm = new PageModel<>((int) page.getTotalElements(), page.getSize(), page.getTotalPages(),
+				page.getContent());
+		return pm;
+	}
+	
+	public PageModel<Request> listAllByClientIdentificationNumberOnLazyModel(String identificationNumber, PageRequestModel pr) {
+		Pageable pageable = pr.toSpringPageRequest();
+		Page<Request> page = requestRepository.findAllByClientIdentificationNumber(identificationNumber, pageable);
+
+		PageModel<Request> pm = new PageModel<>((int) page.getTotalElements(), page.getSize(), page.getTotalPages(),
+				page.getContent());
+		return pm;
+	}
 }
