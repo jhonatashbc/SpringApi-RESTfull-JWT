@@ -1,0 +1,552 @@
+{
+	"info": {
+		"_postman_id": "a2dd46f0-3893-4707-8f59-9d967b5399c9",
+		"name": "spring-course-col",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "GET USER BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/users/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SAVE USER",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token_admin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"juliana\",\r\n    \"email\":\"juliana@gmail.com\",\r\n    \"password\": \"senha123\",\r\n    \"role\": \"SIMPLE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/users",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE USER",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token_simple}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"id\": 4,\r\n            \"name\": \"juliana cassia\",\r\n            \"email\": \"juliana@gmail.com\",\r\n            \"password\": \"senha123\",\r\n            \"role\": \"SIMPLE\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/users/4",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST ALL USERS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token_admin}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/users?size=5&search=henrique",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "search",
+									"value": "henrique"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN USER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jhonatashbc@hotmail.com\",\r\n    \"password\": \"senha123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/users/login",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET REQUESTS BY USER ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/users/1/requests",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE USER ROLE",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token_admin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"ADMINISTRATOR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/users/role/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"users",
+								"role",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "requests",
+			"item": [
+				{
+					"name": "GET REQUEST BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/requests/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"requests",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SAVE REQUEST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\": \"Migração da infraestrutura a AWS\",\r\n    \"description\": \"Devemos migrar toda a infraestrutura da aplicação para a Amazon web service\",\r\n    \"owner\": {\r\n        \"id\": 2,\r\n        \"name\": \"Izabela Barbosa\",\r\n        \"email\": \"izabelabarbosadasilva@gmail.com\",\r\n        \"role\": \"SIMPLE\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/requests",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE REQUEST",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\": \"Migração da infraestrutura a AWS\",\r\n    \"description\": \"Devemos migrar toda a infraestrutura da aplicação para a Amazon web service, para utilizar elastic beans talk, RDS, S3, EC2\",\r\n    \"state\": \"OPEN\",\r\n    \"owner\": {\r\n        \"id\": 2,\r\n        \"name\": \"Izabela Barbosa\",\r\n        \"email\": \"izabelabarbosadasilva@gmail.com\",\r\n        \"role\": \"SIMPLE\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/requests/2",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"requests",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST ALL REQUESTS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}/requests?",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"requests"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET REQUEST STAGES BY REQUEST ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/requests/1/stages",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"requests",
+								"1",
+								"stages"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "request-stages",
+			"item": [
+				{
+					"name": "GET REQUEST STAGE BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/stages/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"stages",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SAVE REQUEST STAGE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Verificação do load balancer no presente no ambiente do elastic beanstalk\",\r\n    \"state\": \"IN_PROGRESS\",\r\n    \"request\": {\r\n        \"id\": 2,\r\n        \"suject\": \"Migração da infraestrutura a AWS\",\r\n        \"description\": \"Devemos migrar toda a infraestrutura da aplicação para a Amazon web service, para utilizar elastic beans talk, RDS, S3, EC2\",\r\n        \"creationDate\": \"2021-01-07T15:00:00.000+00:00\",\r\n        \"state\": \"OPEN\",\r\n        \"owner\": {\r\n            \"id\": 2,\r\n            \"name\": \"Izabela Barbosa\",\r\n            \"email\": \"izabelabarbosadasilva@gmail.com\",\r\n            \"role\": \"SIMPLE\"\r\n        }\r\n    },\r\n    \"owner\": {\r\n        \"id\": 1,\r\n        \"name\": \"Jhonatas henrique\",\r\n        \"email\": \"jhonatashbc@hotmail.com\",\r\n        \"role\": \"ADMINISTRATOR\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/stages",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"stages"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "client",
+			"item": [
+				{
+					"name": "GET REQUEST BY CLIENT ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/client/1/requests",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"client",
+								"1",
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST ALL CLIENTS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/client",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"client"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "18996582687",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET CLIENT BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/client/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE CLIENT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Jhonatas henrique Barbosa\",\r\n    \"identificationNumber\": \"123456789\",\r\n    \"address\": \"Rua Leontina Augusta de Souza\",\r\n    \"addressNumber\": \"55\",\r\n    \"cep\": \"19883548\",\r\n    \"complement\": \"\",\r\n    \"phoneNumber\": \"18996582687\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/client/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SAVE CLIENT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Juliana de Cassia\",\r\n    \"identificationNumber\": \"123456789\",\r\n    \"address\": \"Rua Leontina Augusta de Souza\",\r\n    \"addressNumber\": \"55\",\r\n    \"cep\": \"19883548\",\r\n    \"complement\": \"\",\r\n    \"phoneNumber\": \"1899999999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/client",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
